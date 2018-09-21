@@ -247,6 +247,7 @@ def build_tree(rows, header, depth=0, id=0):
     # depending on on the answer.
     return Decision_Node(question, true_branch, false_branch, depth, id, rows)
 
+
 ## TODO: Step 8 - already done for you
 def prune_tree(node, prunedList):
     """Builds the tree.
@@ -272,6 +273,7 @@ def prune_tree(node, prunedList):
 
     return node
 
+
 ## TODO: Step 6
 def classify(row, node):
     """See the 'rules of recursion' above."""
@@ -288,17 +290,31 @@ def classify(row, node):
     else:
         return classify(row, node.false_branch)
 
-## TODO: Step 4
+
+#  Step 4
 def print_tree(node, spacing=""):
     """World's most elegant tree printing function."""
 
     # Base case: we've reached a leaf
     if isinstance(node, Leaf):
-        print (spacing + "Predict", node.predictions)
+        print (spacing,
+               "Predict",
+               node.predictions,
+               '  (Depth: ',
+               str(node.depth),
+               ', ID: ',
+               str(node.id),
+               ')')
         return
 
     # Print the question at this node
-    print (spacing + str(node.question))
+    print (spacing,
+           str(node.question),
+           '  (Depth: ',
+           str(node.depth),
+           ', ID: ',
+           str(node.id),
+           ')')
 
     # Call this function recursively on the true branch
     print (spacing + '--> True:')
@@ -316,8 +332,6 @@ def print_leaf(counts):
     for lbl in counts.keys():
         probs[lbl] = str(int(counts[lbl] / total * 100)) + "%"
     return probs
-
-
 
 
 ## TODO: Step 5
