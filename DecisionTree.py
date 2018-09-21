@@ -32,8 +32,6 @@ def class_counts(rows):
 #######
 
 
-
-
 def is_numeric(value):
     """Test if a value is numeric."""
     return isinstance(value, int) or isinstance(value, float)
@@ -250,7 +248,7 @@ def build_tree(rows, header, depth=0, id=0):
     return Decision_Node(question, true_branch, false_branch, depth, id, rows)
 
 
-## TODO: Step 8 - already done for you
+# Step 8 - already done for you
 def prune_tree(node, prunedList):
     """Builds the tree.
 
@@ -262,8 +260,8 @@ def prune_tree(node, prunedList):
     # Base case: we've reached a leaf
     if isinstance(node, Leaf):
         return node
-    # If we reach a pruned node, make that node a leaf node and return. Since it becomes a leaf node, the nodes
-    # below it are automatically not considered
+    # If we reach a pruned node, make that node a leaf node and return. Since it becomes a leaf node
+    # the nodes below it are automatically not considered
     if int(node.id) in prunedList:
         return Leaf(node.rows, node.id, node.depth)
 
@@ -276,7 +274,7 @@ def prune_tree(node, prunedList):
     return node
 
 
-## TODO: Step 6
+# Step 6
 def classify(row, node):
     """See the 'rules of recursion' above."""
 
