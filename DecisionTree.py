@@ -126,8 +126,8 @@ def info_gain(left, right, current_uncertainty):
     """
     p = float(len(left)) / (len(left) + len(right))
 
-    # TODO Step 3, Use Entropy in place of Gini
-    return current_uncertainty - p * gini(left) - (1 - p) * gini(right)
+    # Step 3, Use Entropy in place of Gini
+    return current_uncertainty - p * entropy(left) - (1 - p) * entropy(right)
 
 
 def find_best_split(rows, header):
@@ -170,7 +170,8 @@ def find_best_split(rows, header):
 
     return best_gain, best_question
 
-## TODO: Step 2
+
+# Step 2
 class Leaf:
     """A Leaf node classifies data.
 
@@ -185,7 +186,7 @@ class Leaf:
         self.depth = depth
 
 
-## TODO: Step 1
+# Step 1
 class Decision_Node:
     """A Decision Node asks a question.
 
@@ -206,13 +207,9 @@ class Decision_Node:
         self.depth = depth
         self.rows = rows
         self.id = id
-        false_branch.id = 2*id+1
-        true_branch.id = 2*id+2
 
 
-
-
-## TODO: Step 3
+# Step 3
 def build_tree(rows, header, depth=0, id=0):
     """Builds the tree.
 
@@ -239,7 +236,7 @@ def build_tree(rows, header, depth=0, id=0):
     true_rows, false_rows = partition(rows, question)
 
     # Recursively build the true branch.
-    true_branch = build_tree(true_rows, header, depth + 1, 2 * id + 2 )
+    true_branch = build_tree(true_rows, header, depth + 1, 2 * id + 2)
 
     # Recursively build the false branch.
     false_branch = build_tree(false_rows, header, depth + 1, 2 * id + 1)

@@ -13,8 +13,8 @@ lst = df.values.tolist()
 # print(math.log(3, 2))  # 1.58 just proving the point
 # print(entropy(lst[10:65]))  # .84
 # print(entropy(lst[0:2]))  # 0.0 min entropy (all the same flower classification)
-# t = build_tree(lst, header)
-# print_tree(t)
+t = build_tree(lst, header)
+print_tree(t)
 #
 # print("********** Leaf nodes ****************")
 # leaves = getLeafNodes(t)
