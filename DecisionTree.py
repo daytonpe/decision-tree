@@ -191,6 +191,8 @@ class Decision_Node:
     """A Decision Node asks a question.
 
     This holds a reference to the question, and to the two child nodes.
+
+    Notice that the node IDs will get higher than the number of nodes if the tree isn't full.
     """
 
     def __init__(self,
@@ -334,19 +336,32 @@ def print_leaf(counts):
     return probs
 
 
-## TODO: Step 5
-def getLeafNodes(node, leafNodes =[]):
+# Step 5
+def getLeafNodes(node, leafNodes=[]):
+    """Returns a list of all leaf nodes of a tree"""
 
-    # Returns a list of all leaf nodes of a tree
+    # if it's a leaf, add it to the list
+    if isinstance(node, Leaf):
+        leafNodes.append(node)
+        return
 
+    getLeafNodes(node.true_branch)
+    getLeafNodes(node.false_branch)
 
     return leafNodes
 
 
-def getInnerNodes(node, innerNodes =[]):
+def getInnerNodes(node, innerNodes=[]):
+    """Returns a list of all non-leaf nodes of a tree"""
 
-    # Returns a list of all non-leaf nodes of a tree
+    # make sure it's not a leaf
+    if isinstance(node, Leaf):
+        return
 
+    # add it to the list
+    innerNodes.append(node)
+    getInnerNodes(node.true_branch)
+    getInnerNodes(node.false_branch)
 
     return innerNodes
 
