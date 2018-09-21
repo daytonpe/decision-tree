@@ -22,11 +22,12 @@ for leaf in leaves:
     print("id = " + str(leaf.id) + " depth =" + str(leaf.depth))
 
 print("\n\n********** Non-leaf nodes ****************")
-# print(type(t.false_branch))
 innerNodes = getInnerNodes(t)
-# print(innerNodes)
 for inner in innerNodes:
     print("id = " + str(inner.id) + " depth =" + str(inner.depth))
+
+print('\n\n')
+print(classify(lst[50], t))
 
 # trainDF, testDF = model_selection.train_test_split(df, test_size=0.2)
 # train = trainDF.values.tolist()

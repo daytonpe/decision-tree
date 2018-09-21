@@ -366,8 +366,13 @@ def getInnerNodes(node, innerNodes=[]):
     return innerNodes
 
 
-## TODO: Step 6
+# Step 6
 def computeAccuracy(rows, node):
+    totalRows = len(rows)
+    numAccurate = 0
+    for row in rows:
+        predicted_lbl = classify(row, node)
+        if predicted_lbl == row[len(row)-1]:  # assumes truth is last label in row
+            numAccurate += 1
 
-
-    return 0
+    return round(numAccurate / totalRows, 2)
