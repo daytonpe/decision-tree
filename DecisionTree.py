@@ -1,7 +1,7 @@
 from __future__ import print_function
 import pandas as pd
 from sklearn import model_selection
-import  math
+import math
 
 
 def unique_vals(rows, col):
@@ -107,10 +107,15 @@ def gini(rows):
         impurity -= prob_of_lbl**2
     return impurity
 
-## TODO: Step 3
-def entropy(rows):
 
-    return 0
+# TODO Step 3
+def entropy(rows):
+    counts = class_counts(rows)
+    entropy = 0
+    for lbl in counts:
+        prob_of_lbl = counts[lbl] / float(len(rows))
+        entropy -= prob_of_lbl * math.log(prob_of_lbl, 2)
+    return entropy
 
 
 def info_gain(left, right, current_uncertainty):
@@ -121,16 +126,21 @@ def info_gain(left, right, current_uncertainty):
     """
     p = float(len(left)) / (len(left) + len(right))
 
-    ## TODO: Step 3, Use Entropy in place of Gini
+    # TODO Step 3, Use Entropy in place of Gini
     return current_uncertainty - p * gini(left) - (1 - p) * gini(right)
 
 
 def find_best_split(rows, header):
     """Find the best question to ask by iterating over every feature / value
-    and calculating the information gain."""
+    and calculating the information gain.
+
+    rows = [[6.3, 2.3, 4.4, 1.3, 'Iris-versicolor'], ....]
+    header = ['SepalL', 'SepalW', 'PetalL', 'PetalW', 'Class']
+
+    """
     best_gain = 0  # keep track of the best information gain
     best_question = None  # keep train of the feature / value that produced it
-    current_uncertainty = gini(rows)
+    current_uncertainty = entropy(rows)
     n_features = len(rows[0]) - 1  # number of columns
 
     for col in range(n_features):  # for each feature
@@ -169,7 +179,10 @@ class Leaf:
     """
 
     def __init__(self, rows, id, depth):
-        self.predictions = class_counts(rows)
+        counts = class_counts(rows)
+        self.predictions = max(counts, key=counts.get)
+        self.id = id
+        self.depth = depth
 
 
 ## TODO: Step 1
@@ -190,6 +203,11 @@ class Decision_Node:
         self.question = question
         self.true_branch = true_branch
         self.false_branch = false_branch
+        self.depth = depth
+        self.rows = rows
+        self.id = id
+        false_branch.id = 2*id+1
+        true_branch.id = 2*id+2
 
 
 
@@ -203,7 +221,7 @@ def build_tree(rows, header, depth=0, id=0):
     giant stack traces.
     """
     # depth = 0
-    # Try partitioing the dataset on each of the unique attribute,
+    # Try partitioning the dataset on each of the unique attribute,
     # calculate the information gain,
     # and return the question that produces the highest gain.
 
