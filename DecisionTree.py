@@ -364,6 +364,25 @@ def getInnerNodes(node, innerNodes=[]):
     return innerNodes
 
 
+def getLeafParents(node, leafParentNodes=[]):
+    """Returns a list of all leaf nodes' parent nodes"""
+
+    # if either child is a Leaf, then the current node must be a parent
+    if isinstance(node.true_branch, Leaf):
+        leafParentNodes.append(node)
+        return
+
+    if isinstance(node.false_branch, Leaf):
+        leafParentNodes.append(node)
+        return
+
+    # recurse
+    getLeafParents(node.true_branch)
+    getLeafParents(node.false_branch)
+
+    return leafParentNodes
+
+
 # Step 6
 def computeAccuracy(rows, node):
     totalRows = len(rows)

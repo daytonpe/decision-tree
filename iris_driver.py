@@ -5,7 +5,7 @@ from sklearn import model_selection
 header = ['SepalL', 'SepalW', 'PetalL', 'PetalW', 'Class']
 
 # Iris Data
-df = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data',
+df = pd.read_csv('./datasets/iris.csv',
                  header=None,
                  names=['SepalL', 'SepalW', 'PetalL', 'PetalW', 'Class'])
 
@@ -35,7 +35,7 @@ test = testDF.values.tolist()
 
 t = build_tree(train, header)
 print("\n\n*************Tree before pruning*******\n")
-# print_tree(t)
+print_tree(t)
 acc = computeAccuracy(test, t)
 print("\nAccuracy on test = " + str(acc))
 
@@ -43,6 +43,6 @@ print("\nAccuracy on test = " + str(acc))
 t_pruned = prune_tree(t, [12, 13, 5, 11])
 
 print("\n\n*************Tree after pruning*******\n")
-# print_tree(t_pruned)
+print_tree(t_pruned)
 acc = computeAccuracy(test, t)
 print("\nAccuracy on test = " + str(acc))
