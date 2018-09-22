@@ -1,2 +1,5 @@
 /__pycache__
 */.DS_Store
+/submit
+test_driver.py
+datasets/no2.csv
