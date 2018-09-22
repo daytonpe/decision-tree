@@ -8,11 +8,9 @@ Creates a decision tree to classify iris flowers from the UC Irvine Machine Lear
 
 #### Instructions
 
-Use the driver to specify the dataset to which you want to apply this model.
+`python3 iris_driver.py`
 
-```
-python3 iris_driver.py
-```
+*Note*: Some basic formatting was changed for clarity and the datasets were downloaded for local use as the hosting website was often down, thus file paths have been changed. The original driver.py will still run.
 
 #### Decision Tree for Iris Data
 
@@ -88,9 +86,8 @@ Here are some of the observed results:
 I used the model to construct a decision tree for red wine quality.
 
 #### Instructions
-```
-python3 wine_driver.py
-```
+
+`python3 wine_driver.py`
 
 #### Dataset
 
